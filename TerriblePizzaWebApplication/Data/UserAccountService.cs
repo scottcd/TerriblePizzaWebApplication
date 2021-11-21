@@ -11,8 +11,9 @@ namespace TerriblePizzaWebApplication.Data {
             this.dbContext = dbContext;
         }
         
-        public async Task<List<UserAccount>> GetAccountAsync() {
-            return await dbContext.Account.ToListAsync();
+        public async Task<List<UserAccount>> GetAllAccountsAsync() {
+            
+            return await dbContext.Account.FromSqlRaw("Select * FROM Account").ToListAsync();
         }
 
         public async Task<UserAccount> AddAccountAsync(UserAccount person) {
