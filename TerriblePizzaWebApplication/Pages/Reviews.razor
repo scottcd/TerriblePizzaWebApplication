@@ -1,10 +1,13 @@
 ﻿@page "/review"
+@using SharedComponents
+
+<MenuBar />
 
 <h1>Reviews</h1>
 
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 </head>
 
 <body>
@@ -19,8 +22,7 @@
         <button class="btn btn-primary" @onclick="submitReview">Submit</button>
         <br><br>
         <ul>
-            @foreach (var reviewer in reviewList)
-            {
+            @foreach (var reviewer in reviewList) {
                 /*<li>@reviewer.name : @reviewer.review</li>*/
             }
         </ul>
@@ -32,11 +34,9 @@
     private List<string> reviewList = new();
     //private List<Account> reviewList = new();
 
-    private void submitReview()
-    {
-        if (!string.IsNullOrWhiteSpace(name) && !string.IsNullOrWhiteSpace(review))
-        {
+    private void submitReview() {
+        if (!string.IsNullOrWhiteSpace(name) && !string.IsNullOrWhiteSpace(review)) {
             //reviewers.Add(new Account { });
         }
     }
- }
+}

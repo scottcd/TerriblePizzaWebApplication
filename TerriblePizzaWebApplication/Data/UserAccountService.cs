@@ -16,6 +16,11 @@ namespace TerriblePizzaWebApplication.Data {
             return await dbContext.Account.FromSqlRaw("Select * FROM Account").ToListAsync();
         }
 
+        public async Task<UserAccount> GetAccountAsync(string username, string password) {
+
+            return await dbContext.Account.FromSqlRaw($"Select * FROM Account Where username='{username}' AND password='{password}'").FirstOrDefaultAsync();
+        }
+
         public async Task<UserAccount> AddAccountAsync(UserAccount person) {
             try {
                 dbContext.Account.Add(person);

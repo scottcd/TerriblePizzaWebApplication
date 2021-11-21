@@ -1,0 +1,39 @@
+﻿@page "/login"
+@inject UserAccountService service
+@using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
+@inject ProtectedSessionStorage ProtectedSessionStore
+@inject NavigationManager NavigationManager
+
+<form @onsubmit="TryLogin">
+    <label class="row">Username:</label>
+    <input type="text" class="row" @bind="username" />
+    <label class="row">Password:</label>
+    <input type="text" class="row" @bind="password" />
+    <input type="submit" value="Submit" class="btn btn-primary" />
+</form>
+
+@if (invalid is true) {
+    <label class="text-warning">Invalid User/Login.</label>
+}
+
+@code{
+    private UserAccount Account;
+    private string username, password;
+    private bool invalid;
+
+    protected override void OnInitialized() {
+        invalid = false;
+    }
+    private async Task TryLogin() {
+        Account = await service.GetAccountAsync(username, password);
+
+        if (Account is null) {
+            invalid = true;
+        }
+        else {
+            await ProtectedSessionStore.SetAsync("account", Account);
+            NavigationManager.NavigateTo("/");
+        }
+
+    }
+}

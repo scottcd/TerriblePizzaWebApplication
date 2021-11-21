@@ -1,7 +1,19 @@
 ﻿@page "/myaccount"
 @inject UserAccountService service
+@using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
+@inject ProtectedSessionStorage ProtectedSessionStore
+@inject NavigationManager NavigationManager
+
+
+
 
 <h1>Account Page</h1>
+<button @onclick="LogoutUser">Log out</button>
+
+@if (Account is not null) {
+    <label>@Account.Name</label>
+}
+
 
 <div class="container">
     <div class="row bg-light">
@@ -19,14 +31,14 @@
             <tbody>
                 @if (Accounts.Any()) {
                     @foreach (var account in Accounts) {
-                <tr @onclick="(() => SetAccountForUpdate(account))">
-                    <td>@account.Id</td>
-                    <td>@account.Username</td>
-                    <td>@account.Password</td>
-                    <td>@account.Name</td>
-                    <td>@account.Email</td>
-                    <td><button class="btn btn-danger" @onclick="(() => DeleteAccount(account))">Delete</button></td>
-                </tr>
+                        <tr @onclick="(() => SetAccountForUpdate(account))">
+                            <td>@account.Id</td>
+                            <td>@account.Username</td>
+                            <td>@account.Password</td>
+                            <td>@account.Name</td>
+                            <td>@account.Email</td>
+                            <td><button class="btn btn-danger" @onclick="(() => DeleteAccount(account))">Delete</button></td>
+                        </tr>
                     }
                 }
                 else {
@@ -87,14 +99,26 @@
     </div>
 </div>
 
+
+
 @code{
 
     List<UserAccount> Accounts;
     public UserAccount NewAccount { get; set; } = new UserAccount();
     public UserAccount UpdateAccount = new UserAccount();
+    public UserAccount Account { get; set; }
 
     protected override async Task OnInitializedAsync() {
         await RefreshAccounts();
+        var result = await ProtectedSessionStore.GetAsync<UserAccount>("account");
+        if (result.Value is not null) {
+            Account = result.Value;
+        }
+
+    }
+    private void LogoutUser() {
+        ProtectedSessionStore.DeleteAsync("account");
+        NavigationManager.NavigateTo("/login");
     }
     private async Task RefreshAccounts() {
         Accounts = await service.GetAllAccountsAsync();

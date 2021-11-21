@@ -1,9 +1,21 @@
 ﻿@page "/"
+@using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
+@inject ProtectedSessionStorage ProtectedSessionStore
+@using SharedComponents
 
+<MenuBar />
 
 <h1>Home - The Menu</h1>
 
+
+
 @code{
     public bool LoggedIn { get; set; } = false;
-
+    UserAccount Account { get; set; }
+    protected override async Task OnInitializedAsync() {
+        var result = await ProtectedSessionStore.GetAsync<UserAccount>("account");
+        if (result.Value is not null) {
+            Account = result.Value;
+        }
+    }
 }
