@@ -1,8 +1,43 @@
 ﻿@page "/review"
 
+<!DOCTYPE HTML>
 <h1>Reviews</h1>
 
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />    
+</head>
 
+<body>
+    <p>Enter your own Review!</p>
+    <form>
+        Name:
+        <input type="text" name="name" @bind="@name">
+        <br><br>
+        What did you think:
+        <input type="text" name="review" size="150" @bind="@review">
+        <br><br>
+        <button class="btn btn-primary" @onclick="submitReview">Submit</button>
+        <br><br>
+        <ul>
+            @foreach (var reviewer in reviewList)
+            {
+                /*<li>@reviewer.name : @reviewer.review</li>*/
+            }
+        </ul>
+    </form>
+</body>
 @code {
+    private string name;
+    private string review;
+    private List<string> reviewList = new();
+    //private List<Account> reviewList = new();
 
-}
+    private void submitReview()
+    {
+        if (!string.IsNullOrWhiteSpace(name) && !string.IsNullOrWhiteSpace(review))
+        {
+            //reviewers.Add(new Account { });
+        }
+    }
+ }
