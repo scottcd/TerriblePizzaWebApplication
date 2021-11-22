@@ -1,21 +1,32 @@
 ﻿@page "/"
+@inject UserAccountService service
 @using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
 @inject ProtectedSessionStorage ProtectedSessionStore
 @using SharedComponents
+@using MyComponents 
 
 <MenuBar />
 
 <h1>Home - The Menu</h1>
 
-
+@foreach (var item in Pizzas) {
+    @item.Name
+}
 
 @code{
+
+    public List<Pizza> Pizzas { get; set; }
     public bool LoggedIn { get; set; } = false;
     UserAccount Account { get; set; }
     protected override async Task OnInitializedAsync() {
+        Pizzas = new List<Pizza>();
+        await RefreshAccounts();
         var result = await ProtectedSessionStore.GetAsync<UserAccount>("account");
         if (result.Value is not null) {
             Account = result.Value;
         }
+    }
+    private async Task RefreshAccounts() {
+        Pizzas = await service.GetAllPizzasAsync();
     }
 }

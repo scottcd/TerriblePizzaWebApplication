@@ -11,6 +11,7 @@ namespace TerriblePizzaWebApplication.Data {
         }
 
         public DbSet<UserAccount> Account { get; set; }
+        public DbSet<Pizza> MyPizza { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) {

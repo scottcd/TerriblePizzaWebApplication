@@ -1,5 +1,6 @@
 ﻿@page "/review"
 @using SharedComponents
+@using System.Text.Json; 
 
 <MenuBar />
 
@@ -34,9 +35,17 @@
     private List<string> reviewList = new();
     //private List<Account> reviewList = new();
 
+    protected override async Task OnInitializedAsync() {
+    // read JSON to list
+    
+
+    }
+
     private void submitReview() {
         if (!string.IsNullOrWhiteSpace(name) && !string.IsNullOrWhiteSpace(review)) {
             //reviewers.Add(new Account { });
+            // write JSON file
+            
         }
     }
 }
