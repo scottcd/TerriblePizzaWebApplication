@@ -15,24 +15,27 @@ namespace TerriblePizzaWebApplication.Data {
             
             return await dbContext.Account.FromSqlRaw("Select * FROM Account").ToListAsync();
         }
-
+        
         public async Task<List<Pizza>> GetAllPizzasAsync() {
 
             return await dbContext.MyPizza.FromSqlRaw("Select * FROM Pizza").ToListAsync();
         }
 
-        public async Task<UserAccount> GetAccountAsync(string username, string password) {
+        public async Task<UserAccount> GetAccountLoginAsync(string username, string password) {
 
             return await dbContext.Account.FromSqlRaw($"Select * FROM Account Where username='{username}' AND password='{password}'").FirstOrDefaultAsync();
         }
+        public async Task<UserAccount> GetAccountIdAsync(int id) {
 
+            return await dbContext.Account.FromSqlRaw($"Select * FROM Account Where id='{id}'").FirstOrDefaultAsync();
+        }
         public async Task<UserAccount> AddAccountAsync(UserAccount person) {
             try {
                 dbContext.Account.Add(person);
                 await dbContext.SaveChangesAsync();
             }
             catch (Exception) {
-                throw;
+                return null;
             }
             return person;
         }

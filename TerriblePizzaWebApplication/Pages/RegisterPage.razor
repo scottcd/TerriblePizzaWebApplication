@@ -1,0 +1,83 @@
+﻿@page "/login/register"
+@inject UserAccountService service
+@using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
+@inject ProtectedSessionStorage ProtectedSessionStore
+@inject NavigationManager NavigationManager
+
+<div class="center">
+    <form @onsubmit="TryRegister">
+        <label class="labelrow">Please enter your credentials below:</label>
+        <label class="labelrow">Username:</label>
+        <input type="text" class="inputrow" @bind="username" />
+        <label class="labelrow">Password:</label>
+        <input type="text" class="inputrow" @bind="password" />
+        <label class="labelrow">Name:</label>
+        <input type="text" class="inputrow" @bind="name" />
+        <label class="labelrow">Email:</label>
+        <input type="text" class="inputrow" @bind="email" />
+        <input type="submit" value="Submit" class="btn btn-primary" style="margin-top: 20px;" />
+    </form>
+
+    @if (invalid is true) {
+    <label class="text-warning" style="margin-top: 10px;">Invalid Credentials.</label>
+    }
+
+</div>
+
+<style>
+    .center {
+        background-color: #7f0000;
+        margin: auto;
+        width: 30%;
+        border: 3px solid #f05545;
+        padding: 10px;
+        text-align: center;
+    }
+
+    .labelrow {
+        width: 90%;
+        text-align: left;
+        margin: auto;
+        margin-bottom: 10px;
+    }
+
+    .inputrow {
+        width: 90%;
+        text-align: left;
+        margin: auto;
+        margin-bottom: 10px;
+    }
+</style>
+
+@code{
+    private UserAccount Account;
+    private string username, password, name, email;
+    private bool invalid = false;
+
+    private async Task TryRegister() {
+        if (string.IsNullOrWhiteSpace(username) ||
+            string.IsNullOrWhiteSpace(password) ||
+            string.IsNullOrWhiteSpace(name) ||
+            string.IsNullOrWhiteSpace(email)) {
+            invalid = true;
+            return;
+        }
+
+        Random randy = new Random(897897);
+        UserAccount result;
+        try {
+
+            int x = randy.Next(50000);
+            UserAccount newAccount = new UserAccount(x, username, password, name, email);
+            await service.AddAccountAsync(newAccount);
+        }
+        catch (Exception) {
+            int x = randy.Next(50000);
+            UserAccount newAccount = new UserAccount(x, username, password, name, email);
+            await service.AddAccountAsync(newAccount);
+            invalid = true;
+            return;
+        }
+        NavigationManager.NavigateTo("/");
+    }
+}

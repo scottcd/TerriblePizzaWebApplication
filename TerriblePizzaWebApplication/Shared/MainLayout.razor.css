@@ -2,7 +2,8 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    background-color:red;
+    background-color: #212121;
+    color: white;
 }
 
 .main {
@@ -68,4 +69,7 @@
         padding-left: 2rem !important;
         padding-right: 1.5rem !important;
     }
+
+   
+    
 }

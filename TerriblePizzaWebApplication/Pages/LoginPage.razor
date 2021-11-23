@@ -4,17 +4,50 @@
 @inject ProtectedSessionStorage ProtectedSessionStore
 @inject NavigationManager NavigationManager
 
-<form @onsubmit="TryLogin">
-    <label class="row">Username:</label>
-    <input type="text" class="row" @bind="username" />
-    <label class="row">Password:</label>
-    <input type="text" class="row" @bind="password" />
-    <input type="submit" value="Submit" class="btn btn-primary" />
-</form>
+<div class="center">
+    <form @onsubmit="TryLogin">
+        <label class="labelrow">Username:</label>
+        <input type="text" class="inputrow" @bind="username" />
+        <label class="labelrow">Password:</label>
+        <input type="text" class="inputrow" @bind="password" />
+        <input type="submit" value="Submit" class="btn btn-primary" style="margin-top: 20px;" />
+    </form>
 
-@if (invalid is true) {
-    <label class="text-warning">Invalid User/Login.</label>
-}
+
+    <NavLink class="nav-link" href="login/register" Match="NavLinkMatch.All" style="margin-top: 10px;">
+       New User? Register here.
+    </NavLink>
+    
+    @if (invalid is true) {
+        <label class="text-warning" style="margin-top: 10px;">Invalid User/Login.</label>
+    }
+</div>
+
+<style>
+    .center {
+        background-color: #7f0000;
+        margin: auto;
+        width: 30%;
+        border: 3px solid #f05545;
+        padding: 10px;
+        text-align: center;
+    }
+
+    .labelrow {
+        width: 90%;
+        text-align: left;
+        margin: auto;
+        margin-bottom: 10px;
+    }
+
+    .inputrow {
+        width: 90%;
+        text-align: left;
+        margin: auto;
+        margin-bottom: 10px;
+    }
+</style>
+
 
 @code{
     private UserAccount Account;
@@ -25,7 +58,7 @@
         invalid = false;
     }
     private async Task TryLogin() {
-        Account = await service.GetAccountAsync(username, password);
+        Account = await service.GetAccountLoginAsync(username, password);
 
         if (Account is null) {
             invalid = true;
