@@ -2,7 +2,7 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    background-color: #212121;
+    background-color: #181818;
     color: white;
 }
 
@@ -11,7 +11,8 @@
 }
 
 .sidebar {
-    background-image: linear-gradient(180deg, rgb(5, 39, 103) 0%, #3a0647 70%);
+    background-color: #800000;
+    border: 3px solid #000000;
 }
 
 .top-row {

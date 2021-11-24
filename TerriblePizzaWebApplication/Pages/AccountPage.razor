@@ -1,46 +1,41 @@
 ﻿@page "/myaccount"
-@inject UserAccountService service
+@inject DataBaseService service
 @using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
 @inject ProtectedSessionStorage ProtectedSessionStore
 @inject NavigationManager NavigationManager
 
 
 
-
 <h1>Account Page</h1>
+<hr style="border: 1px solid #800000" />
 
-<div class="container">
+<div class="center">
 
-    <div class="row m-5">
-        <div class="col-5 bg-light m-2 justify-content-end">
-            <div class="p-3 mb-1 bg-primary text-black-50 text-center">Update User Account</div>
-            <EditForm Model="@Account">
-                <div class="form-group">
-                    <label for="username" style="color:black">Username</label>
-                    <input type="text" id="username" class="form-control" @bind-value="@Account.Username" />
-                </div>
-                <div class="form-group">
-                    <label for="password" style="color:black">Password</label>
-                    <input type="text" id="password" class="form-control" @bind="@Account.Password" />
-                </div>
-                <div class="form-group">
-                    <label for="name" style="color:black">Name</label>
-                    <input type="text" id="name" class="form-control" @bind="@Account.Name" />
-                </div>
-                <div class="form-group">
-                    <label for="email" style="color:black">Email</label>
-                    <input type="text" id="email" class="form-control" @bind="@Account.Email" />
-                </div>
-                <div class="text-center p-3 mb-3">
-                    <button class="btn btn-info" @onclick="UpdateAccountData"> Update Account</button>
-                    <button class="btn btn-info" @onclick="LogoutUser">Log out</button>
-                    <button class="btn btn-info" @onclick="DeleteAccount">Delete Account</button>
-                </div>
-            </EditForm>
+    <div class="p-3 mb-1 bg-transparent title text-center">Update User Account</div>
+    <EditForm Model="@Account">
+        <div class="form-group">
+            <label class="labelrow" for="username">Username</label>
+            <input type="text" id="username" class="form-control inputrow" @bind-value="@Account.Username" />
         </div>
-    </div>
+        <div class="form-group">
+            <label class="labelrow" for="password">Password</label>
+            <input type="text" id="password" class="form-control inputrow" @bind="@Account.Password" />
+        </div>
+        <div class="form-group">
+            <label class="labelrow" for="name">Name</label>
+            <input type="text" id="name" class="form-control inputrow" @bind="@Account.Name" />
+        </div>
+        <div class="form-group">
+            <label class="labelrow" for="email">Email</label>
+            <input type="text" id="email" class="form-control inputrow" @bind="@Account.Email" />
+        </div>
+        <div class="text-center p-3 mb-3">
+            <button class="btn btn-info" @onclick="UpdateAccountData"> Update Account</button>
+            <button class="btn btn-info" @onclick="LogoutUser">Log out</button>
+            <button class="btn btn-info" @onclick="DeleteAccount">Delete Account</button>
+        </div>
+    </EditForm>
 </div>
-
 
 
 @code{
@@ -77,4 +72,3 @@
         NavigationManager.NavigateTo("/login");
     }
 }
-    

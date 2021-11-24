@@ -6,14 +6,14 @@
 <div class="main">
     <div class="top-row px-4" style="float:right">
         @if (account is null) {
-            <NavLink class="nav-link" href="login" Match="NavLinkMatch.All">
-                <span class="oi oi-home" aria-hidden="true"></span> Login
-            </NavLink>
+        <NavLink class="nav-link" href="login" Match="NavLinkMatch.All">
+            Login <span class="oi oi-account-login" aria-hidden="true"></span>
+        </NavLink>
         }
         else {
-            <NavLink class="nav-link" href="myaccount" Match="NavLinkMatch.All">
-                <span class="oi oi-home" aria-hidden="true"></span> Welcome, @account.Name
-            </NavLink>
+    <NavLink class="nav-link" href="myaccount" Match="NavLinkMatch.All">
+        Hello, @account.Name <span class="oi oi-bullhorn" aria-hidden="true"></span>
+    </NavLink>
         }
 
     </div>

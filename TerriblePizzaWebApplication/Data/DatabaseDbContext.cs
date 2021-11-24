@@ -5,8 +5,8 @@ using System.Linq;
 using System.Threading.Tasks;
 
 namespace TerriblePizzaWebApplication.Data {
-    public class UserAccountDbContext : DbContext{
-        public UserAccountDbContext(DbContextOptions<UserAccountDbContext> options)
+    public class DatabaseDbContext : DbContext{
+        public DatabaseDbContext(DbContextOptions<DatabaseDbContext> options)
                    : base(options) {
         }
 

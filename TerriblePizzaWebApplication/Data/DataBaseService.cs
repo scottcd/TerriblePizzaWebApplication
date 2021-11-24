@@ -5,9 +5,9 @@ using System.Linq;
 using System.Threading.Tasks;
 
 namespace TerriblePizzaWebApplication.Data {
-    public class UserAccountService {
-        private UserAccountDbContext dbContext;
-        public UserAccountService(UserAccountDbContext dbContext) {
+    public class DataBaseService {
+        private DatabaseDbContext dbContext;
+        public DataBaseService(DatabaseDbContext dbContext) {
             this.dbContext = dbContext;
         }
         
