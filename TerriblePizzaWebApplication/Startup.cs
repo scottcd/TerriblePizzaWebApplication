@@ -19,10 +19,10 @@ namespace TerriblePizzaWebApplication {
         public void ConfigureServices(IServiceCollection services) {
             services.AddRazorPages();
             services.AddServerSideBlazor();
-            services.AddDbContext<DatabaseDbContext>(options => {
+            services.AddDbContext<MyDbContext>(options => {
                 options.UseSqlite("Data Source = database.db");
             });
-            services.AddScoped<DataBaseService>();
+            services.AddScoped<MyDbService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

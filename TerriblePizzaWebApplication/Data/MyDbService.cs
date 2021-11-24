@@ -5,9 +5,9 @@ using System.Linq;
 using System.Threading.Tasks;
 
 namespace TerriblePizzaWebApplication.Data {
-    public class DataBaseService {
-        private DatabaseDbContext dbContext;
-        public DataBaseService(DatabaseDbContext dbContext) {
+    public class MyDbService {
+        private MyDbContext dbContext;
+        public MyDbService(MyDbContext dbContext) {
             this.dbContext = dbContext;
         }
         
@@ -34,7 +34,8 @@ namespace TerriblePizzaWebApplication.Data {
                 dbContext.Account.Add(person);
                 await dbContext.SaveChangesAsync();
             }
-            catch (Exception) {
+            catch (Exception e) {
+                System.Diagnostics.Debug.WriteLine($"\n\n\n{e.StackTrace}\n\n {e.Message}\n\n\n");
                 return null;
             }
             return person;

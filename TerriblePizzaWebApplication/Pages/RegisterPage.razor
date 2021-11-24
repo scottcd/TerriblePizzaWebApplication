@@ -1,5 +1,5 @@
 ﻿@page "/login/register"
-@inject DataBaseService service
+@inject MyDbService service
 @using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
 @inject ProtectedSessionStorage ProtectedSessionStore
 @inject NavigationManager NavigationManager
@@ -22,35 +22,37 @@
                 <label class="labelrow">Password:</label>
                 <input type="text" class="form-control inputrow" @bind="password" />
             </div>
-            
+
             <div class="form-group">
                 <label class="labelrow">Name:</label>
                 <input type="text" class="form-control inputrow" @bind="name" />
             </div>
-            
+
             <div class="form-group">
                 <label class="labelrow">Email:</label>
                 <input type="text" class="form-control inputrow" @bind="email" />
             </div>
-            
+
             <div class="form-group">
                 <input type="submit" value="Submit" class="btn btn-primary" style="margin-top: 20px;" />
-                <input type="button" value="Cancel" class="btn btn-primary" style="margin-top: 20px;" @onclick="CancelRegister" />
             </div>
+            
         </form>
+
 
         @if (invalid is true) {
             <label class="text-warning" style="margin-top: 10px;">Invalid Credentials.</label>
         }
-
     </div>
+
+
 
 
     @code{
         private UserAccount Account;
         private string username, password, name, email;
         private bool invalid = false;
-
+        
         private async Task TryRegister() {
             if (string.IsNullOrWhiteSpace(username) ||
                 string.IsNullOrWhiteSpace(password) ||
@@ -60,20 +62,17 @@
                 return;
             }
 
-            Random randy = new Random(897897);
-            UserAccount result;
+            Random randy = new Random();
             try {
 
                 int x = randy.Next(50000);
                 UserAccount newAccount = new UserAccount(x, username, password, name, email);
-                await service.AddAccountAsync(newAccount);
+                var d = await service.AddAccountAsync(newAccount);
             }
             catch (Exception) {
                 int x = randy.Next(50000);
                 UserAccount newAccount = new UserAccount(x, username, password, name, email);
                 await service.AddAccountAsync(newAccount);
-                invalid = true;
-                return;
             }
             NavigationManager.NavigateTo("/");
         }
