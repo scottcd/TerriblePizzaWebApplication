@@ -27,7 +27,7 @@
         <ul>
             @foreach (Review reviewer in reviewList)
             {
-                <li>@reviewer.User.Name at @reviewer.CreationDate : @reviewer.ReviewText</li>
+                <li>@reviewer.User.Name at @reviewer.CreationDate : @((MarkupString)reviewer.ReviewText)</li>
             }
         </ul>
 </body>
