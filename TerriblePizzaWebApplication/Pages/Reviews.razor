@@ -66,15 +66,8 @@
             }
 
             //add the review to the list and rewrite the json file
-            reviewList.Add(new Review(DateTime.Now, review, account));
-
-            string reviews = "";
-            foreach (Review reviewer in reviewList)
-            {
-                reviews += JsonSerializer.Serialize(reviewList) + "\n";
-            }
-            reviews = reviews.Remove(reviews.Length - 1, 1);
-            await File.WriteAllTextAsync("wwwroot/data/Reviews.json", reviews);
+            reviewList.Add(new Review(DateTime.Now, review, account));          
+            await File.WriteAllTextAsync("wwwroot/data/Reviews.json", JsonSerializer.Serialize(reviewList));
         }
     }
 }
