@@ -1,27 +1,27 @@
 ﻿@page "/"
 @inject MyDbService service
 @using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
-@inject ProtectedSessionStorage ProtectedSessionStore
+@inject ProtectedLocalStorage ProtectedSessionStore
 @using SharedComponents
 
 <MenuBar />
 <h1>Home - The Menu</h1>
-<hr style="border: 1px solid #800000"/>
+<hr style="border: 1px solid #800000" />
 
 
 <h2>Specialty Pizzas</h2>
-    <ul>
-        @foreach (var item in Pizzas) {
-            <li>@item.Name</li>
-        }
-    </ul>
-    <br />
-    <h2>Sizes</h2>
-    <ul>
-        <li>Small ($5)</li>
-        <li>Medium ($7)</li>
-        <li>Large ($9)</li>
-    </ul>
+<ul>
+    @foreach (var item in Pizzas) {
+        <li>@item.Name</li>
+    }
+</ul>
+<br />
+<h2>Sizes</h2>
+<ul>
+    <li>Small ($5)</li>
+    <li>Medium ($7)</li>
+    <li>Large ($9)</li>
+</ul>
 <br />
 <h2>Images</h2>
 
