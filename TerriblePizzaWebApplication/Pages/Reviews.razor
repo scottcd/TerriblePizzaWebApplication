@@ -17,18 +17,23 @@
 </head>
 
 
-<body class="center" style="width:100%; color:white">
-    <p>Enter your own Review!</p>
-    <label class="labelrow">What did you think: </label>
-    <input class="inputrow" type="text" name="review" size="150" @bind="@review">
-    <br><br>
-    <button class="btn btn-primary" @onclick="submitReview">Submit</button>
-    <br><br>
-    <ul>
-        @foreach (Review reviewer in reviewList) {
-            <li>@reviewer.User.Name at @reviewer.CreationDate : @((MarkupString)reviewer.ReviewText)</li>
-        }
-    </ul>
+<body style="color:white">
+    <div class="center" style="width:100%;">
+        <label class="title" style="font-size:x-large;">Enter your own Review!</label>
+        <hr style="border: 1px solid #FFFFFF" />
+        <label class="labelrow">What did you think: </label>
+        <input class="inputrow" type="text" name="review" size="150" @bind="@review">
+        <br><br>
+        <button class="terriblebutton" @onclick="submitReview">Submit</button>
+        <br><br>
+    </div>
+
+    @foreach (Review reviewer in reviewList) {
+        <div class="center" style="width:100%;">
+            <label class="labelrow">@reviewer.User.Name at @reviewer.CreationDate : @((MarkupString)reviewer.ReviewText)</label>
+        </div>
+    }
+
 </body>
 
 

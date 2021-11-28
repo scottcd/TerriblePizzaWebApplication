@@ -76,6 +76,13 @@ a, .btn-link {
     margin-bottom: 10px;
 }
 
+.terriblebutton {
+    background-color: #ba8b00;
+    border: 3px solid #400000;
+    color: white;
+    padding: 5px 10px;
+}
+
 .title {
     font-size: larger;
     font-weight: 600;

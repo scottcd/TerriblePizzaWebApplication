@@ -11,13 +11,26 @@ namespace TerriblePizzaWebApplication.Data {
         public string Password { get; set; }
         public string Name { get; set; }
         public string Email { get; set; }
+        public string? CreditCard { get; set; }
+        public decimal TotalMoney { get; set; }
+        public int TotalPizzas { get; set; }
         public UserAccount() { }
-        public UserAccount(int id, string username, string password, string name, string email) {
+        public UserAccount(int id, string username, string password, string name, string email, string creditCard, int pizzas, int money) {
             Id = id;
             Username = username;
             Password = password;
             Name = name;
             Email = email;
+            CreditCard = creditCard;
+            TotalMoney = money;
+            TotalPizzas = pizzas;
+        }
+
+        public void AddTotalPizzasOrdered(int numberOfPizzas) {
+            TotalPizzas += numberOfPizzas;
+        }
+        public void AddTotalMoneySpent(decimal totalSpent) {
+            TotalMoney += totalSpent;
         }
     }
 }

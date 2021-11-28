@@ -11,36 +11,37 @@
 
 
 
-@code {
-
-}
-
-<div style="display: inline-block; width: 40%; height: 600px; vertical-align: top;">
+<div style="display: inline-block; width: 49%; height: 600px; vertical-align: top;">
     <div class="center" style="width: 100%; height: 80%; overflow-y: scroll">
-        <label class="labelrow">This will be the list of purchased pizzas</label>
+        <label class="title" style="font-size:x-large;">Selected Pizzas</label>
+        <hr style="border: 1px solid #FFFFFF" />
         @foreach (var pizza in SelectedPizzas) {
             <label class="labelrow">@pizza.Name    $@pizza.Price.00</label>
         }
     </div>
 
 
-    <div class="center" style="width: 100%; height: 15%">
-        <label class="labelrow">Total Amount: $@TotalAmount</label>
+    <div class="center" style="width: 100%; height: 20%">
+
         @if (DisableBuy is true) {
-            <label class="labelrow">Log in to Purchase.</label>
+            <label class="title">Log in to Purchase.</label>
         }
-        <button id="PurchaseButton" @onclick="BuyPizzas" disabled="@DisableBuy">Buy</button>
+        else {
+            <label class="labelrow">Total Amount: $@TotalAmount</label>
+            <button class="terriblebutton" @onclick="BuyPizzas" disabled="@DisableBuy">Buy</button>
+        }
+
     </div>
 </div>
 
-<div style="display: inline-block; width: 40%; ">
+<div style="display: inline-block; width: 49%; ">
     @foreach (var pizza in AvailablePizzas) {
         <div class="center" style="width: 100%; height:100px">
             <label class="labelrow" style="width:50%; float:left">@pizza.Name</label>
             <label class="labelrow" style="width:10%; float:right"> $@pizza.Price.00</label>
             <label class="labelrow">A @pizza.Sauce sauce pizza with @pizza.Topping1 @pizza.Topping2 @pizza.Topping3</label>
-            <button @onclick="args => AddPizza(pizza)">+</button>
-            <button @onclick="args => RemovePizza(pizza)">-</button>
+            <button class="terriblebutton" @onclick="args => AddPizza(pizza)">+</button>
+            <button class="terriblebutton" @onclick="args => RemovePizza(pizza)">-</button>
         </div>
 
     }
@@ -96,8 +97,11 @@
     }
 
     private async Task BuyPizzas() {
-        // charge card
+        Account.AddTotalMoneySpent(TotalAmount);
+        Account.AddTotalPizzasOrdered(SelectedPizzas.Count);
         SelectedPizzas.Clear();
+        TotalAmount = 0;
+        await service.UpdateAccountAsync(Account);
         await ProtectedSessionStore.SetAsync("pizzas", SelectedPizzas);
     }
 }

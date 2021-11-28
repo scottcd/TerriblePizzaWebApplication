@@ -11,7 +11,11 @@
 
 <div class="center">
 
-    <div class="p-3 mb-1 bg-transparent title text-center">Update User Account</div>
+    <label class="title" style="font-size:x-large;">My Account</label>
+    <hr style="border: 1px solid #FFFFFF" />
+    <label class="labelrow">Total Dollars Spent: $@Account.TotalMoney.00</label>
+    <label class="labelrow">Total Pizzas Ordered: @Account.TotalPizzas</label>
+
     <EditForm Model="@Account">
         <div class="form-group">
             <label class="labelrow" for="username">Username</label>
@@ -29,10 +33,14 @@
             <label class="labelrow" for="email">Email</label>
             <input type="text" id="email" class="form-control inputrow" @bind="@Account.Email" />
         </div>
+        <div class="form-group">
+            <label class="labelrow" for="email">Credit Card</label>
+            <input type="text" id="email" class="form-control inputrow" @bind="@Account.CreditCard" />
+        </div>
         <div class="text-center p-3 mb-3">
-            <button class="btn btn-info" @onclick="UpdateAccountData"> Update Account</button>
-            <button class="btn btn-info" @onclick="LogoutUser">Log out</button>
-            <button class="btn btn-info" @onclick="DeleteAccount">Delete Account</button>
+            <button class="terriblebutton" @onclick="UpdateAccountData"> Update Account</button>
+            <button class="terriblebutton" @onclick="LogoutUser">Log out</button>
+            <button class="terriblebutton" @onclick="DeleteAccount">Delete Account</button>
         </div>
     </EditForm>
 </div>

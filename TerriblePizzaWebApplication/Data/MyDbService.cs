@@ -40,11 +40,14 @@ namespace TerriblePizzaWebApplication.Data {
             }
             return person;
         }
+
         public async Task<UserAccount> UpdateAccountAsync(UserAccount account) {
             try {
-                var productExist = dbContext.Account.FirstOrDefault(p => p.Id == account.Id);
-                if (productExist != null) {
-                    dbContext.Update(account);
+                var foundAccount = dbContext.Account.FirstOrDefault(p => p.Id == account.Id);
+                if (foundAccount != null) {
+                    foundAccount.TotalPizzas = account.TotalPizzas;
+                    foundAccount.TotalMoney = account.TotalMoney;
+                    dbContext.Account.Update(foundAccount);
                     await dbContext.SaveChangesAsync();
                 }
             }
