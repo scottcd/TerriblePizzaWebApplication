@@ -12,10 +12,14 @@
 <div class="center">
 
     <label class="title" style="font-size:x-large;">My Account</label>
+    
     <hr style="border: 1px solid #FFFFFF" />
+    
     <label class="labelrow">Total Dollars Spent: $@Account.TotalMoney.00</label>
     <label class="labelrow">Total Pizzas Ordered: @Account.TotalPizzas</label>
-
+    
+    <hr style="border: 1px solid #FFFFFF" />
+    
     <EditForm Model="@Account">
         <div class="form-group">
             <label class="labelrow" for="username">Username</label>

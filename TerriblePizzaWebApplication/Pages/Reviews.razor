@@ -30,7 +30,14 @@
 
     @foreach (Review reviewer in reviewList) {
         <div class="center" style="width:100%;">
-            <label class="labelrow">@reviewer.User.Name at @reviewer.CreationDate : @((MarkupString)reviewer.ReviewText)</label>
+            <div style="text-align: left;">
+                <img class="oi oi-person" /> @reviewer.User.Name
+                <label> at @reviewer.CreationDate</label>:
+            </div>
+            <div style="text-align: left;">
+                <label>@((MarkupString)reviewer.ReviewText)</label>
+            </div>
+            
         </div>
     }
 
